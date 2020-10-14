@@ -10,8 +10,8 @@ export default [
   {
     input: 'src/index.ts',
     output: [
-      { file: pkg.main, format: 'cjs', sourceMap: true },
-      { file: pkg.module, format: 'esm', sourceMap: true },
+      { file: pkg.main, format: 'cjs', sourcemap: true },
+      { file: pkg.module, format: 'es', sourcemap: true },
     ],
     plugins: [
       external(),
