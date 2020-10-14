@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
 
-interface useLoadingDotsArgs {
+export interface useLoadingDotsArgs {
   readonly maxCount?: number;
   readonly intervalMs?: number;
 }
-interface useLoadingDotsResponse {
+export interface useLoadingDotsResponse {
   readonly count: number;
   readonly start: () => void;
   readonly stop: (withReset?: boolean) => void;
