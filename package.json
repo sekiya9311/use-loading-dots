@@ -1,13 +1,15 @@
 {
   "name": "@sekiya9311/use-loading-dots",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "types": "dist/types/index.d.ts",
   "repository": "https://github.com/sekiya9311/use-loading-dots",
   "author": "sekiya9311",
   "license": "MIT",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "peerDependencies": {
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
