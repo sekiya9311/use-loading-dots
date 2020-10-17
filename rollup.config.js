@@ -1,30 +1,33 @@
-import { nodeResolve } from '@rollup/plugin-node-resolve';
+import resolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 import commonjs from '@rollup/plugin-commonjs';
 import external from 'rollup-plugin-peer-deps-external';
-import dts from 'rollup-plugin-dts';
+import path from 'path';
 
 import pkg from './package.json';
 
-export default [
+const configs = [
   {
-    input: 'src/index.ts',
-    output: [
-      { file: pkg.main, format: 'cjs', sourcemap: true },
-      { file: pkg.module, format: 'es', sourcemap: true },
-    ],
-    plugins: [
-      external(),
-      nodeResolve(),
-      typescript(),
-      commonjs({
-        include: ['node_modules/**'],
-      }),
-    ],
+    dir: path.dirname(pkg.main),
+    format: 'cjs',
+    declarationDir: path.dirname(pkg.main),
   },
   {
-    input: 'src/index.ts',
-    output: [{ file: pkg.types, format: 'es' }],
-    plugins: [dts()],
+    dir: path.dirname(pkg.module),
+    format: 'es',
+    declarationDir: path.dirname(pkg.module),
   },
 ];
+
+export default configs.map(({ dir, format, declarationDir }) => ({
+  input: 'src/index.ts',
+  output: [{ dir, format, sourcemap: true, exports: 'named', preserveModules: true }],
+  plugins: [
+    external(),
+    resolve({ extensions: ['.js', '.ts'] }),
+    typescript({ declarationDir }),
+    commonjs({
+      include: ['node_modules/**'],
+    }),
+  ],
+}));
